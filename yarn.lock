@@ -1633,6 +1633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/noto-mono@npm:^4.5.3":
+  version: 4.5.3
+  resolution: "@fontsource/noto-mono@npm:4.5.3"
+  checksum: 78787a758ab8137a663bf026020b1816f11caf02c151c01cfd474d5a68d884e777c280aaf501a6d6052583b867f3cb7ddf45b2349aab52ea6aee982606aa2d66
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -3306,6 +3313,7 @@ __metadata:
     "@chakra-ui/react": ^2.3.4
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
+    "@fontsource/noto-mono": ^4.5.3
     "@tanstack/react-location": ^3.7.4
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6

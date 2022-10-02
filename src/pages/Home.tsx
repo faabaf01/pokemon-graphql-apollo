@@ -1,17 +1,28 @@
 //no need to use usestate and useeffect
-import { Box, Button, HStack, Spacer, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Spacer,
+  Spinner,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import Header from "../components/Header";
 import PokemonCards from "../components/PokemonCards";
-import { PokemonQuery } from "../hooks/usePokemons";
+import { PokemonQuery } from "../graphql/GetAllPokemons";
 import { useQuery } from "@apollo/client";
-import { GET_POKEMONS } from "../hooks/usePokemons";
+import { GET_ALL_POKEMONS } from "../graphql/GetAllPokemons";
+import ShowLoading from "../components/ShowLoading";
+import ShowError from "../components/ShowError";
 
 export default function Home() {
   const PAGE_SIZE = 14;
   const [page, setPage] = useState(0);
 
-  const { data, loading, error } = useQuery<PokemonQuery>(GET_POKEMONS, {
+  const { data, loading, error } = useQuery<PokemonQuery>(GET_ALL_POKEMONS, {
     variables: {
       limit: PAGE_SIZE,
       offset: page * PAGE_SIZE,
@@ -33,7 +44,7 @@ export default function Home() {
 
       <HStack justify={"center"}>
         <Button
-          colorScheme={"red"}
+          colorScheme={"pink"}
           disabled={!page}
           onClick={() => setPage((prev) => prev - 1)}
         >
@@ -44,14 +55,17 @@ export default function Home() {
         <Box>Page {page + 1}</Box>
         <Spacer />
 
-        <Button colorScheme={"red"} onClick={() => setPage((prev) => prev + 1)}>
+        <Button
+          colorScheme={"pink"}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
           Next
         </Button>
       </HStack>
 
-      {error && <h1>Something went wrong!</h1>}
+      {error && <ShowError />}
       {loading ? (
-        <h1>LOADING...</h1>
+        <ShowLoading />
       ) : (
         <PokemonCards pokemons={data!.pokemons.results} />
       )}

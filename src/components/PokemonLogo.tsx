@@ -1,10 +1,6 @@
 import { Image } from "@chakra-ui/react";
 
-interface Props {}
-
-function PokemonLogo(props: Props) {
-  const {} = props;
-
+export default function PokemonLogo() {
   return (
     <Image
       src="https://i.imgur.com/iPvcyJv.png"
@@ -15,4 +11,3 @@ function PokemonLogo(props: Props) {
   );
 }
 
-export default PokemonLogo;

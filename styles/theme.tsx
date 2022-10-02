@@ -1,16 +1,16 @@
 // theme.js
 import { extendTheme } from "@chakra-ui/react";
-// import "@fontsource/montserrat";
+import "@fontsource/noto-mono";
 
 const theme = extendTheme({
   styles: {
     global: {
       body: {
-        fontFamily: "Noto, sans-serif",
+        fontFamily: "Noto Mono, sans-serif",
         color: "black",
       },
       html: {
-        fontFamily: "Noto, sans-serif",
+        fontFamily: "Noto Mono, sans-serif",
         color: "black",
       },
     },

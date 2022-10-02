@@ -1,17 +1,14 @@
 import { Box, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
-import { PokemonMove } from "../pages/Details";
+import { PokemonMove } from "../graphql/GetPokemonDetail";
 
 interface Props {
   pokeMoves: PokemonMove[];
 }
 
-export default function PokemonDetails({ pokeMoves }: Props) {
-  // const { name, id } = data;
-  // console.log(name)
-
+export default function PokemonMoves({ pokeMoves }: Props) {
   return (
     <>
-      <Flex flex={1} justify={"center"}>
+      <Flex flex={1} paddingLeft={4}>
         <Heading> Moves: </Heading>
       </Flex>
       <SimpleGrid

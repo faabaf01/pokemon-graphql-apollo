@@ -1,52 +1,45 @@
 import { Link } from "@tanstack/react-location";
 import { useQuery } from '@apollo/client';
 import Header from "../components/Header";
-import { Button, Spinner, Stack, Text } from "@chakra-ui/react";
-import GET_POKEMON_DETAIL from "../graphql/GetPokemonDetail";
-import PokemonDetails from "../components/PokemonDetails";
-
-// interface IPokemon {
-//   name: string;
-//   id: number;
-//   types: any[];
-//   moves: any[];
-// }
-
-export interface PokemonMove {
-  move: { name: string };
-}
-
-interface PokemonDetailQuery {
-  pokemon: {
-    moves: PokemonMove[];
-  };
-}
+import { Button, Stack } from "@chakra-ui/react";
+import {
+  GET_POKEMON_DETAIL,
+  PokemonDetailQuery,
+} from "../graphql/GetPokemonDetail";
+import PokemonMoves from "../components/PokemonMoves";
+import PokemonTypes from "../components/PokemonTypes";
+import PokemonProfile from "../components/PokemonProfile";
+import ShowLoading from "../components/ShowLoading";
+import ShowError from "../components/ShowError";
 
 export default function Details() {
-  // const [pokemonData, setPokemonData] = useState<IPokemon>();
-
   const queryParams = new URLSearchParams(window.location.search);
   const name = queryParams.get("name");
+  const gqlVariables = {
+    variables: { name },
+  };
 
   const { loading, error, data } = useQuery<PokemonDetailQuery>(
     GET_POKEMON_DETAIL,
-    {
-      variables: { name: name },
-    }
+    gqlVariables
   );
-
-  console.log(data);
 
   return (
     <Stack bg={"orange.200"}>
       <Header />
       <Link to="/">
-        <Button colorScheme={"orange"}>Go back to Home</Button>
+        <Button colorScheme={"pink"}>Back to Home</Button>
       </Link>
 
-      {error && <Text>Something went wrong!</Text>}
-      {loading && <Spinner />}
-      {data && <PokemonDetails pokeMoves={data!.pokemon.moves} />}
+      {error && <ShowError />}
+      {loading && <ShowLoading />}
+      {data && (
+        <>
+          <PokemonProfile props={data!.pokemon} />
+          <PokemonTypes pokeTypes={data!.pokemon.types} />
+          <PokemonMoves pokeMoves={data!.pokemon.moves} />
+        </>
+      )}
     </Stack>
   );
 }
